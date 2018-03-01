@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kjw.domain2.BoardVO;
 import com.kjw.domain2.Criteria;
+import com.kjw.domain2.SearchCriteria;
 import com.kjw.persistence2.BoardDAO;
 
 //스프링 빈으로 인식되기 위해 @Service 사용.
@@ -64,6 +65,20 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return dao.listSearchCount(cri);
 	}
 
 }

@@ -25,29 +25,29 @@
 						
 					<!-- 제목 검색-->	
 					<option value = "t"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 't'?'selected':''}"/>>
 						Title</option>
 						
 					<!-- 내용 검색 -->	
 					<option value = "c"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 'c'?'selected':''}"/>>
 						Content</option>
 						
 					<!-- 작성자 검색	 -->
 					<option value = "w"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 'w'?'selected':''}"/>>
 						Writer</option>
 						
 					<option value = "tc"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 'tc'?'selected':''}"/>>
 						Title OR Content</option>
 						
 					<option value = "cw"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 'cw'?'selected':''}"/>>
 						Content OR Writer</option>
 						
 					<option value = "tcw"
-						<c:out value = "${cri.searchType == null?'selected':''}"/>>
+						<c:out value = "${cri.searchType eq 'tcw'?'selected':''}"/>>
 						Title OR Content OR Writer</option>						
 				</select>
 				
@@ -122,6 +122,28 @@
 		if(result == 'success'){
 			alert("처리가 완료되었습니다.");
 		}
+	</script>
+	
+	
+	<script>
+		$(document).ready(function(){
+			
+			$('#searchBtn').on(
+					"click",
+					function(event){
+						
+						self.location = "list"
+							+'${pageMaker.makeQuery(1)}'
+							+"&SearchType="
+							+$("select option:selected").val()
+							+"&keyword="+$('#keywordInput').val();
+					});
+			
+			$('#newBtn').on("click", function(evt){
+				
+				self.location = "register";
+			});
+		});
 	</script>
 	
 <%@ include file = "footer.jsp" %>

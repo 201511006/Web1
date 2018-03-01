@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.kjw.domain2.BoardVO;
 import com.kjw.domain2.Criteria;
+import com.kjw.domain2.SearchCriteria;
 import com.kjw.persistence2.BoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,8 +50,8 @@ public class BoardDAOTest {
 		
 		BoardVO board = new BoardVO();
 		board.setBno(9);
-		board.setTitle("수정된 글이다~");
-		board.setWriter("hello");
+		board.setTitle("수정~");
+		board.setWriter("hello22");
 		board.setContent("수정 테스트~");
 		dao.update(board);
 	}
@@ -73,7 +74,7 @@ public class BoardDAOTest {
 		}
 	}*/
 	
-	@Test
+/*	@Test
 	public void testListCriteria()throws Exception{
 		
 		
@@ -87,7 +88,7 @@ public class BoardDAOTest {
 		for(BoardVO boardVO : list){
 			logger.info(boardVO.getBno() + "-" + boardVO.getTitle());
 		}
-	}
+	}*/
 	
 	@Test
 	public void testURI()throws Exception{
@@ -103,6 +104,26 @@ public class BoardDAOTest {
 		logger.info(uriComponents.toString());
 	}
 
+	@Test 
+	public void testDynamic() throws Exception{
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setKeyword("글");
+		cri.setSearchType("t");
+		
+		logger.info("==========================");
+		
+		List<BoardVO> list = dao.listSearch(cri);
+		
+		for(BoardVO boardVO : list){
+			logger.info(boardVO.getBno() + ": "+ boardVO.getTitle());
+		}
+		
+		logger.info("===========================");
+		
+		logger.info("COUNT: "+dao.listSearchCount(cri));
+	}
 
 }
 
